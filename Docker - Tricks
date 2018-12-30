@@ -1,0 +1,20 @@
+
+1.  Stop all the running containers
+    
+    a. docker stop $(docker ps -a -q) 
+     or,
+    b. docker ps -a -q | ForEach { docker stop $_ } # Powershell
+
+2. In case of error like: "Error starting userland proxy: mkdir", run above command and restart docker (See https://github.com/docker/for-win/issues/573 )
+
+3. Run alpine and execute scripts: 
+    a. docker pull alpine:latest
+    b. docker container run -it --name alpine-test alpine:latest /bin/sh
+       # cat/etc/*release
+       # ls
+       # apk --help      // To find all possible commands on installing
+       # apk add tree    // installs tree
+       # apk --help tree // get manual
+       # apk tree --L 3  // only 3 levels
+
+4. 

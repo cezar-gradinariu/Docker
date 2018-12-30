@@ -1,0 +1,4 @@
+FROM alpine:latest
+LABEL maintainer="Cezar Gradinariu"
+LABEL description="This example Dockerfile installs alpine with tree utility already on."
+RUN apk add tree
