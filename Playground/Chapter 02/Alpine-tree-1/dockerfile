@@ -1,0 +1,3 @@
+FROM local:alpine-tree
+LABEL maintainer="Cezar Gradinariu"
+LABEL description="This example Dockerfile uses my previous file as base."
