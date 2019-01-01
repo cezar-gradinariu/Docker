@@ -17,4 +17,44 @@
        # apk --help tree // get manual
        # apk tree --L 3  // only 3 levels
 
-4. 
+4. Delete all images: 
+    a. docker rmi -f  $(docker images -a -q)
+5. Delete all containers: 
+    a. docker rm -f $(docker ps -a -q) 
+6. Show all containers: 
+    a. docker container ls -a 
+    or
+    b. docker ps -a
+7. Show all images
+    a. docker image ls
+    or 
+    b. docker images
+8. Run a container - examples
+    a. docker container run -d --name nginx-test -p 8080:80 nginx  
+        # -d , --detach => will run in the background. 
+            ## Without it, the console will show up and you would have to interact with it or quit. Quit stops the container (?? - doesn't seem to).
+        # --name nginx-test => will name it nginx-test, and that name is a friendly one, else a random one is generated. 
+            ## Can be usd as identifier in other commands
+               See: docker container rm nginx-test => will remove the container from registry
+            ## You cannot have two containers with the same name , since it is used as a friendly ID
+        # -p or --port => -p <exposedport>:<container-port> => will expose as 8080 the port 80 from container.
+            ## Cannot expose to same port ( 8080 in the example ) from another container unless this container is stopped
+        # nginx => the image we want to use to spin up the container, if not present will be automatically pulled.
+9. Get help:
+    a. docker run --help
+10. Attaching 
+    a. docker container run -d -p 8080:80 --name nginx-test nginx  
+    b. hit localhost:8080 => nothing in console, response OK
+    c. docker container attach nginx-test
+    d. hit localhost:8080 => console will show: 172.17.0.1 - - [31/Dec/2018:23:06:55 +0000] "GET / HTTP/1.1" 304 0 "-"......
+    e. Ctrl-C
+    f. hit localhost:8080 => nothing in console, response OK, container still up
+    g. docker container attach --sig-proxy=false nginx-test // re-atach with extra flag 
+    h. hit localhost:8080 => nothing in console, response OK
+    
+    Why use it: 
+    "Use docker attach to attach your terminal's standard input, output, and error (or any combination of the three) to 
+    a running container using the container's ID or name. This allows you to view its ongoing output or to control it 
+    interactively, as though the commands were running directly in your terminal."
+
+
