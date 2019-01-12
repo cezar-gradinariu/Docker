@@ -53,7 +53,7 @@
         # nginx => the image we want to use to spin up the container, if not present will be automatically pulled.
 9. Get help:
     a. docker run --help
-10. Attaching 
+10. Attaching to a running container
     a. docker container run -d -p 8080:80 --name nginx-test nginx  
     b. hit localhost:8080 => nothing in console, response OK
     c. docker container attach nginx-test
@@ -68,4 +68,7 @@
     a running container using the container's ID or name. This allows you to view its ongoing output or to control it 
     interactively, as though the commands were running directly in your terminal."
 
-
+11. exec a running container
+    This will spawn a second process within the container that yo can interact with.
+    a. docker container exec nginx-test cat /etc/debian_version => will get debian version
+    b. docker container exec -i -t nginx-test /bin/bash => will make it interactive => see -i flag, so you can run debian shell comands
