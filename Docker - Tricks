@@ -72,3 +72,42 @@
     This will spawn a second process within the container that yo can interact with.
     a. docker container exec nginx-test cat /etc/debian_version => will get debian version
     b. docker container exec -i -t nginx-test /bin/bash => will make it interactive => see -i flag, so you can run debian shell comands
+
+12. logs from a running container
+    a. docker container logs --tail 5 nginx-test // last 5 logs
+    b. docker container logs -f nginx-test 
+        i.  -f flag is short for --follow and will show logs in realtime
+    c. docker container logs --since 2018-08-25T18:00 nginx-test
+        i. --since will tell to show all logs since tha given date 
+    d. docker log times are always in GMT, if you want the local date call 
+        i. docker container logs --since 2018-08-25T18:00 -t nginx-test => -t stands for timestamp
+
+13. See all processes running in container with top
+    a. docker container top nginx-test
+
+14. docker container stats nginx-test => shows cpu used CPU, RAM, NETWORK, DISK IO and PIDS
+    a. for all container use -a/-all flag docker container stats -a
+
+15. docker container pause nginx-test
+16. docker container unpause nginx-test
+
+17. Lifecycle
+    a. Start
+        i.  docker container start nginx2 
+    b. Stop
+        i.  docker container stop nginx2
+        ii. docker container stop -t 60 nginx3 // give it 60 seconds
+    c. Restart - stops then restart, can send-t flag)
+        i.  docker container restart nginx4
+        ii. docker container restart -t 60 nginx4
+    d. Kill - sends a sIGKILL command immediately
+        i.  docker container kill nginx5
+    e. Pause - will pause the container
+        i.  container pause nginx-test
+    f. Unpause - will start the paused contaienr from where it was paused with the original flags it was started with, this is different from start where we send the flag every time
+        i.  container unpause nginx-test
+
+18. Removing a container
+    a. docker container rm nginx4
+    b. docker container rm -f nginx4 => forces a stop and a remove
+    c. docker container prune  => removes all stopped containers
