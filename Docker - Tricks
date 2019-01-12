@@ -7,6 +7,17 @@
 
 2. In case of error like: "Error starting userland proxy: mkdir", run above command and restart docker (See https://github.com/docker/for-win/issues/573 )
 
+2.1 Docker image build
+    a. docker image build --file <path_to_Dockerfile> --tag <REPOSITORY>:<TAG> .
+    with example:
+    b. docker image build -t local:scratch-alpine .
+        i.   --file was optional here as it is at root level
+        ii.  -t is shortcut for --tag
+        iii. you first cd in the root of that folder with dockerfile
+
+2.2 Docker image inspect
+    docker image inspect <IMAGE_ID>
+
 3. Run alpine and execute scripts: 
     a. docker pull alpine:latest
     b. docker container run -it --name alpine-test alpine:latest /bin/sh
